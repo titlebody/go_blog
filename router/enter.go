@@ -5,15 +5,19 @@ import (
 	"go_blog/global"
 )
 
+type routerGroup struct {
+	*gin.RouterGroup
+}
+
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	r := gin.Default()
+	api := r.Group("api")
+	rouerGroup := routerGroup{api}
+	{
+		rouerGroup.SettingsRouter()
+	}
+	//系统配置api
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"code": 200,
-			"msg":  "success",
-		})
-	})
 	return r
 }
