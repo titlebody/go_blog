@@ -14,9 +14,7 @@ func InitRouter() *gin.Engine {
 	r := gin.Default()
 	api := r.Group("api")
 	rouerGroup := routerGroup{api}
-	{
-		rouerGroup.SettingsRouter()
-	}
+	rouerGroup.SettingsRouter()
 	//系统配置api
 
 	return r

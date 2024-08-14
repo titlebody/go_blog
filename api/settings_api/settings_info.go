@@ -1,11 +1,10 @@
 package settings_api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"go_blog/model/res"
+)
 
 func (SettingsApi) SettingsInfoView(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"code": 200,
-		"msg":  "ok",
-	})
-
+	res.FailWithCode(res.SettingsError, c)
 }
