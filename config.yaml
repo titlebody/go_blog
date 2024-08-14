@@ -2,8 +2,8 @@
 system:
   host: "0.0.0.0"
   port: 5001
-  env: debug
-  #env: release
+#  env: debug
+  env: release
 
 mysql:
   host: 127.0.0.1

@@ -1,19 +1,17 @@
 package core
 
 import (
-	"fmt"
 	"go_blog/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
 	"time"
 )
 
 func InitGorm() *gorm.DB {
 	//判断配置文件
 	if global.Config.Mysql.Host == "" {
-		log.Panicln("未配置mysql,取消gorm连接")
+		global.Log.Warnln("未配置mysql,取消gorm连接")
 		return nil
 	}
 	dsn := global.Config.Mysql.Dsn()
@@ -25,13 +23,13 @@ func InitGorm() *gorm.DB {
 	} else {
 		mysqlLogger = logger.Default.LogMode(logger.Error) //只打印错误sql
 	}
+
 	// 连接
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mysqlLogger,
 	})
 	if err != nil {
-		fmt.Println("连接失败", dsn)
-		log.Panicln(err)
+		global.Log.Fatalf("[%s]连接失败", dsn)
 	}
 	sqlDB, _ := db.DB()
 	sqlDB.SetMaxIdleConns(10)               //最大空闲连接数
