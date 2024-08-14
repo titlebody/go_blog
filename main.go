@@ -1,16 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"go_blog/config"
+	"go_blog/core"
+	"go_blog/global"
 )
 
 func main() {
 	// 配置文件初始化
-	config.InitConfig()
+	core.InitConfig()
+	// 数据库初始化
+	global.DB = core.InitGorm()
 
-	fmt.Println(config.Config.System)
-	fmt.Println(config.Config.Logger)
-	fmt.Println(config.Config.Mysql)
-	fmt.Println("Hello World")
 }
