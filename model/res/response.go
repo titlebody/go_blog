@@ -44,7 +44,7 @@ func FailWithMessage(data interface{}, c *gin.Context) {
 	Result(Err, data, "失败", c)
 }
 
-func FailWithCode(code int, c *gin.Context) {
+func FailWithCode(code ErrCode, c *gin.Context) {
 	msg, ok := ErrorMap[code]
 	if ok {
 		Result(Err, map[string]any{}, msg, c)
