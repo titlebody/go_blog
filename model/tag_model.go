@@ -1,7 +1,7 @@
 package model
 
 type TagModel struct {
-	Model
+	MODEL
 	Title    string         `gorm:"size:16" json:"title"`
-	Articles []ArticleModel `gorm:"many2many:article_tag " json:"articles"`
+	Articles []ArticleModel `gorm:"many2many:article_tag_models" json:"-"`
 }

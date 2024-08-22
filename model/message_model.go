@@ -1,7 +1,7 @@
 package model
 
 type MessageModel struct {
-	Model
+	MODEL
 	SendUserID       uint      `gorm:"primaryKey" json:"send_user_id"` // 发送者ID
 	SendUserModel    UserModel `gorm:"foreignKey:SendUserID" json:"-"`
 	SendUserNickName string    `gorm:"size:42" json:"send_user_nick_name"`

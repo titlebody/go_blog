@@ -3,7 +3,7 @@ package model
 import "go_blog/model/c_type"
 
 type MenuModel struct {
-	Model
+	MODEL
 	MenuTitle    string        `gorm:"size:32" json:"menu_title"`                                                                      // 菜单标题
 	MenuTitleEn  string        `gorm:"size:32" json:"menu_title_en"`                                                                   // 菜单标题
 	Slogan       string        `gorm:"size:64" json:"slogan"`                                                                          // 菜单标语
