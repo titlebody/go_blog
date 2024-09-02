@@ -2,7 +2,12 @@
 package config
 
 type Config struct {
-	System system `yaml:"system"`
-	Logger logger `yaml:"logger"`
-	Mysql  mysql  `yaml:"mysql"`
+	System   System   `yaml:"system"`
+	Logger   Logger   `yaml:"logger"`
+	Mysql    Mysql    `yaml:"mysql"`
+	SiteInfo SiteInfo `yaml:"site_info"`
+	Email    Email    `yaml:"email"`
+	JWT      JWT      `yaml:"jwt"`
+	QiNiu    QiNiu    `yaml:"qi_niu"`
+	QQ       QQ       `yaml:"qq"`
 }

@@ -1,21 +1,60 @@
-#系统配置
 system:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 5001
-#  env: debug
   env: release
-
+logger:
+  level: info
+  prefix: '[go-blog]'
+  director: logger
+  show_line: false
+  log_in_console: false
 mysql:
   host: 127.0.0.1
   port: 3306
   db: go_blog
   user: root
-  password: 123456
+  password: "123456"
   log_level: dev
+site_info:
+  created_at: "2023-02-14"
+  bei_an: 豫-109312
+  title: 胡晨曦的个人博客
+  qq_image: ""
+  version: 1.0.0
+  email: 2387360024@qq.com
+  wechat_image: ""
+  name: 晨曦知道
+  job: 前端开发
+  addr: 河南
+  slogan: 晨曦知道
+  slogan_en: CHENXIZHIDAO
+  web: ""
+  bilibili_url: ""
+  github_url: ""
 
-logger:
-  level: info
-  prefix: '[go-blog]'
-  director: logger
-  show_line: true   //是否显示行号
-  log_in_console: true   //是否显示路径
+email:
+  host: smtp.qq.com
+  port: 456
+  user: 2387360024@qq.com
+  password: xxx
+  default_from_email: 晨曦知道
+  use_ssl: xx
+  user_tls: xx
+
+jwt:
+  secret: xxx
+  expires: 48
+  issuer: xxx
+
+qi_niu:
+  access_key: UMM-xx-FdRIF-xx
+  secret_key: xx
+  bucket: chenxizhidao
+  cdn: xx://xx.xx.com/
+  zone: xx
+  size: 5
+
+qq:
+  app_id: "xx"
+  key: xx
+  redirect: "http://xx.xx.com/login?flag=qq"

@@ -4,6 +4,7 @@ import (
 	"go_blog/config"
 	"go_blog/global"
 	"gopkg.in/yaml.v2"
+	"io/fs"
 	"io/ioutil"
 )
 
@@ -16,4 +17,19 @@ func InitConfig() {
 	}
 	yaml.Unmarshal(yamlFile, Config)
 	global.Config = Config
+}
+
+func SetYaml() error {
+	byteData, err := yaml.Marshal(global.Config)
+	if err != nil {
+		global.Log.Error(err)
+		return err
+	}
+	err = ioutil.WriteFile("./config.yaml", byteData, fs.ModePerm)
+	if err != nil {
+		global.Log.Error(err)
+		return err
+	}
+	global.Log.Info("配置文件修改成功！")
+	return nil
 }
