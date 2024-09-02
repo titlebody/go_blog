@@ -31,21 +31,18 @@ site_info:
   web: ""
   bilibili_url: ""
   github_url: ""
-
 email:
   host: smtp.qq.com
-  port: 456
-  user: 2387360024@qq.com
+  port: "456"
+  user: 111@qq.com
   password: xxx
   default_from_email: 晨曦知道
-  use_ssl: xx
-  user_tls: xx
-
+  use_ssl: false
+  user_tls: false
 jwt:
   secret: xxx
   expires: 48
   issuer: xxx
-
 qi_niu:
   access_key: UMM-xx-FdRIF-xx
   secret_key: xx
@@ -53,8 +50,7 @@ qi_niu:
   cdn: xx://xx.xx.com/
   zone: xx
   size: 5
-
 qq:
-  app_id: "xx"
+  app_id: xx
   key: xx
-  redirect: "http://xx.xx.com/login?flag=qq"
+  redirect: http://xx.xx.com/login?flag=qq
