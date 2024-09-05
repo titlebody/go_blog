@@ -5,9 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"go_blog/global"
 	"go_blog/model/res"
+	"go_blog/utils"
 	"io/fs"
 	"os"
 	"path"
+	"strings"
 )
 
 type FileUploadResponse struct {
@@ -45,6 +47,24 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 
 	//fileHeader, err := c.FormFile("image")
 	for _, file := range fileList {
+
+		fileName := file.Filename
+		nameList := strings.Split(fileName, ".")
+		suffix := strings.ToLower(nameList[len(nameList)-1])
+		/*for _, v := range global.WhiteImageList {
+			if strings.EqualFold(suffix, v) {
+				res.FailWithMessage("文件类型不允许", c)
+				return
+			}
+		}*/
+		if !utils.InList(suffix, global.WhiteImageList) {
+			resList = append(resList, FileUploadResponse{
+				FileName:  file.Filename,
+				IsSuccess: false,
+				Msg:       "文件类型不允许",
+			})
+			continue
+		}
 		filePath := path.Join(basePath, file.Filename)
 		// 判断大小
 		size := float64(file.Size) / float64(1024*1024)
