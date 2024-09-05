@@ -5,7 +5,7 @@ import (
 	"go_blog/global"
 )
 
-type routerGroup struct {
+type RouterGroup struct {
 	*gin.RouterGroup
 }
 
@@ -13,8 +13,9 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	r := gin.Default()
 	api := r.Group("api")
-	rouerGroup := routerGroup{api}
+	rouerGroup := RouterGroup{api}
 	rouerGroup.SettingsRouter()
+	rouerGroup.ImagesRouter()
 	//系统配置api
 
 	return r

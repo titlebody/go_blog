@@ -4,7 +4,7 @@ import (
 	"go_blog/api"
 )
 
-func (r routerGroup) SettingsRouter() {
+func (r RouterGroup) SettingsRouter() {
 	SettingsApi := api.ApiGroupApp.SettingsApi
 
 	r.GET("/settings/:name", SettingsApi.SettingsInfoView)

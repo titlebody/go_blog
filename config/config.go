@@ -10,4 +10,5 @@ type Config struct {
 	JWT      JWT      `yaml:"jwt"`
 	QiNiu    QiNiu    `yaml:"qi_niu"`
 	QQ       QQ       `yaml:"qq"`
+	Upload   Upload   `yaml:"upload"`
 }

@@ -44,6 +44,7 @@ jwt:
   expires: 48
   issuer: xxx
 qi_niu:
+  is_enable: false
   access_key: UMM-xx-FdRIF-xx
   secret_key: xx
   bucket: chenxizhidao
@@ -54,3 +55,6 @@ qq:
   app_id: xx
   key: xx
   redirect: http://xx.xx.com/login?flag=qq
+upload:
+  size: 2
+  path: uploads/file

@@ -20,7 +20,7 @@ func InitConfig() {
 }
 
 func SetYaml() error {
-	byteData, err := yaml.Marshal(global.Config)
+	byteData, err := yaml.Marshal(global.Config)   
 	if err != nil {
 		global.Log.Error(err)
 		return err
