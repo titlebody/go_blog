@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go_blog/global"
+	"go_blog/model"
 	"go_blog/model/res"
 	"go_blog/utils"
+	"io"
 	"io/fs"
 	"os"
 	"path"
@@ -51,12 +53,6 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 		fileName := file.Filename
 		nameList := strings.Split(fileName, ".")
 		suffix := strings.ToLower(nameList[len(nameList)-1])
-		/*for _, v := range global.WhiteImageList {
-			if strings.EqualFold(suffix, v) {
-				res.FailWithMessage("文件类型不允许", c)
-				return
-			}
-		}*/
 		if !utils.InList(suffix, global.WhiteImageList) {
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,
@@ -76,12 +72,33 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 			})
 			continue
 		}
-		resList = append(resList, FileUploadResponse{
-			FileName:  filePath,
-			IsSuccess: true,
-			Msg:       "上传成功",
-		})
-		err := c.SaveUploadedFile(file, filePath)
+		//resList = append(resList, FileUploadResponse{
+		//	FileName:  filePath,
+		//	IsSuccess: true,
+		//	Msg:       "上传成功1",
+		//})
+
+		fileObj, err := file.Open()
+		if err != nil {
+			global.Log.Error(err)
+		}
+		byteDate, err := io.ReadAll(fileObj)
+		imageHash := utils.Md5(byteDate)
+
+		// 去数据库中查判断是否存在
+		var bannerModel model.BannerModel
+		err = global.DB.Take(&bannerModel, "hash = ?", imageHash).Error
+		if err == nil {
+			// 找到了
+			resList = append(resList, FileUploadResponse{
+				FileName:  bannerModel.Path,
+				IsSuccess: false,
+				Msg:       "图片已存在",
+			})
+			continue
+		}
+
+		err = c.SaveUploadedFile(file, filePath)
 		if err != nil {
 			global.Log.Error("文件保存失败", err)
 			resList = append(resList, FileUploadResponse{
@@ -95,6 +112,12 @@ func (ImagesApi) ImageUploadView(c *gin.Context) {
 			FileName:  filePath,
 			IsSuccess: true,
 			Msg:       "上传成功",
+		})
+		// 图片入库
+		global.DB.Create(&model.BannerModel{
+			Path: filePath,
+			Hash: imageHash,
+			Name: fileName,
 		})
 
 	}
