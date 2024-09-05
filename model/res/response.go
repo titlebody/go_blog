@@ -2,6 +2,7 @@ package res
 
 import (
 	"github.com/gin-gonic/gin"
+	"go_blog/utils"
 	"net/http"
 )
 
@@ -58,6 +59,11 @@ func Fail(data interface{}, msg string, c *gin.Context) {
 
 func FailWithMessage(data interface{}, c *gin.Context) {
 	Result(Err, data, "失败", c)
+}
+
+func FailWithError(err error, obj any, c *gin.Context) {
+	msg := utils.GetValidMsg(err, obj, c)
+	FailWithMessage(msg, c)
 }
 
 func FailWithCode(code ErrCode, c *gin.Context) {
