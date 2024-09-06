@@ -44,13 +44,14 @@ jwt:
   expires: 48
   issuer: xxx
 qi_niu:
-  is_enable: false
-  access_key: UMM-xx-FdRIF-xx
-  secret_key: xx
+  is_enable: true
+  access_key: jPLigjY9K_2TGQ9OJrovjOm618tHk1mLM2AqZWAp
+  secret_key: iINKJlO23lBNz41zOLz2t9ntk4KsQ6TOLZoQNHvp
   bucket: chenxizhidao
-  cdn: xx://xx.xx.com/
-  zone: xx
+  cdn: http://sjdwyju8w.hn-bkt.clouddn.com/
+  zone: z2
   size: 5
+  prefix: "gvb"
 qq:
   app_id: xx
   key: xx
