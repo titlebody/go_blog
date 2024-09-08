@@ -18,10 +18,13 @@ func ComList[T any](mode T, option Option) (list []T, count int64, err error) {
 	}
 	if option.Sort == "" {
 		option.Sort = "created_at desc" //默认时间往前排
-		option.Sort = "created_at asc"  //默认时间往后排
+		//option.Sort = "created_at asc"  //默认时间往后排
 	}
+	query := DB.Where(mode)
 	//总数
-	count = DB.Select("id").Find(&list).RowsAffected
+	count = query.Select("id").Find(&list).RowsAffected
+	//这里的query会受上面查询的影响，需要复位
+	query = DB.Where(mode)
 	// 当前第几页
 	offset := option.Limit * (option.Page - 1)
 	if offset < 0 {

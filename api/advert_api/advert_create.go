@@ -8,12 +8,20 @@ import (
 )
 
 type AdvertRequest struct {
-	Title  string `json:"title" binding:"required" msg:"请输入标题"`       // 广告标题
-	Href   string `json:"href" binding:"required,url" msg:"广告链接非法"`   // 广告链接
-	Images string `json:"images" binding:"required,url" msg:"图片地址非法"` // 广告图片
-	IsShow bool   `json:"is_show" binding:"required" msg:"请选择是否显示"`   // 是否显示
+	Title  string `json:"title" binding:"required" msg:"请输入标题" structs:"title"`        // 广告标题
+	Href   string `json:"href" binding:"required,url" msg:"广告链接非法" structs:"href"`     // 广告链接
+	Images string `json:"images" binding:"required,url" msg:"图片地址非法" structs:"images"` // 广告图片
+	IsShow bool   `json:"is_show"  msg:"请选择是否显示" structs:"is_show"`                    // 是否显示
 }
 
+// AdvertCreateView
+// @Tags 广告管理
+// @Summary 创建广告
+// @Description 创建广告
+// @Param data body AdvertRequest true "表示多个参数"
+// @Router /api/adverts [post]
+// @Accept json
+// @Success 200 {object} res.Response{}
 func (AdvertApi) AdvertCreateView(c *gin.Context) {
 	var cr AdvertRequest
 	err := c.ShouldBindJSON(&cr)

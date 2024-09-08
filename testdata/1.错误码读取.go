@@ -1,5 +1,7 @@
 package main
 
+/*package main
+
 import (
 	"encoding/json"
 	"fmt"
@@ -27,3 +29,4 @@ func main() {
 	fmt.Println(errMap)
 	fmt.Println(errMap[res.SettingsError])
 }
+*/

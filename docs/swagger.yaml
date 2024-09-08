@@ -1,0 +1,176 @@
+basePath: /
+definitions:
+  advert_api.AdvertRequest:
+    properties:
+      href:
+        description: 广告链接
+        type: string
+      images:
+        description: 广告图片
+        type: string
+      is_show:
+        description: 是否显示
+        type: boolean
+      title:
+        description: 广告标题
+        type: string
+    required:
+    - href
+    - images
+    - title
+    type: object
+  model.AdvertModel:
+    properties:
+      created_at:
+        type: string
+      href:
+        description: 跳转链接地址
+        type: string
+      id:
+        type: integer
+      images:
+        description: 图片地址
+        type: string
+      is_show:
+        description: 是否显示
+        type: boolean
+      title:
+        description: 标题
+        type: string
+      updated_at:
+        type: string
+    type: object
+  model.RemoveRequest:
+    properties:
+      id_list:
+        items:
+          type: integer
+        type: array
+    type: object
+  res.ListResponse-model_AdvertModel:
+    properties:
+      count:
+        type: integer
+      list:
+        $ref: '#/definitions/model.AdvertModel'
+    type: object
+  res.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+host: 127.0.0.1:5001
+info:
+  contact: {}
+  description: 博客 API文档
+  title: go_blog API文档
+  version: "1.0"
+paths:
+  /api/adverts:
+    delete:
+      consumes:
+      - application/json
+      description: 批量删除广告
+      parameters:
+      - description: 广告id列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.RemoveRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 批量删除广告
+      tags:
+      - 广告管理
+    get:
+      consumes:
+      - application/json
+      description: 广告列表
+      parameters:
+      - in: query
+        name: key
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: sort
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/res.ListResponse-model_AdvertModel'
+              type: object
+      summary: 广告列表
+      tags:
+      - 广告管理
+    post:
+      consumes:
+      - application/json
+      description: 创建广告
+      parameters:
+      - description: 表示多个参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/advert_api.AdvertRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/res.Response'
+      summary: 创建广告
+      tags:
+      - 广告管理
+  /api/adverts/{id}:
+    put:
+      consumes:
+      - application/json
+      description: 修改广告
+      parameters:
+      - description: 广告的一些参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/advert_api.AdvertRequest'
+      - description: 广告ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改广告
+      tags:
+      - 广告管理
+swagger: "2.0"
