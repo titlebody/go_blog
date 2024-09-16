@@ -5,6 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"gorm.io/gorm/schema"
 	"time"
 )
 
@@ -29,6 +30,9 @@ func InitGorm() *gorm.DB {
 	// 连接
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mysqlLogger,
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true, //表名不加复数
+		},
 	})
 	if err != nil {
 		global.Log.Fatalf("[%s]连接失败", dsn)

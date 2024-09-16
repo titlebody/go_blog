@@ -19,6 +19,15 @@ definitions:
     - images
     - title
     type: object
+  images_api.ImagesResponse:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      path:
+        type: string
+    type: object
   model.AdvertModel:
     properties:
       created_at:
@@ -173,4 +182,24 @@ paths:
       summary: 修改广告
       tags:
       - 广告管理
+  /api/images_name:
+    get:
+      consumes:
+      - application/json
+      description: 图片名称列表
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                ' data':
+                  items:
+                    $ref: '#/definitions/images_api.ImagesResponse'
+                  type: array
+              type: object
+      summary: 图片名称列表
+      tags:
+      - 图片管理
 swagger: "2.0"

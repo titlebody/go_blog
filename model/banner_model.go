@@ -15,7 +15,7 @@ type BannerModel struct {
 	Type c_type.ImageType `gorm:"default:1" json:"image_type"` //图片类型，本地还是七牛
 }
 
-// 在同一个事务中更新数据
+// BeforeDelete 在同一个事务中更新数据
 func (b *BannerModel) BeforeDelete(tx *gorm.DB) (err error) {
 	if b.Type == c_type.Local {
 		// 本地图片删除还要删除本地的存储

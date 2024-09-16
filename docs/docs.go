@@ -188,6 +188,41 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/images_name": {
+            "get": {
+                "description": "图片名称列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片名称列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/res.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        " data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/images_api.ImagesResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -213,6 +248,20 @@ const docTemplate = `{
                 },
                 "title": {
                     "description": "广告标题",
+                    "type": "string"
+                }
+            }
+        },
+        "images_api.ImagesResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "path": {
                     "type": "string"
                 }
             }
