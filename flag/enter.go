@@ -2,6 +2,7 @@ package flag
 
 import (
 	sys_flag "flag"
+	"github.com/fatih/structs"
 )
 
 type Option struct {
@@ -20,11 +21,21 @@ func Parse() Option {
 	}
 }
 
-func IsWebStop(option Option) bool {
-	if option.DB {
-		return true
+func IsWebStop(option Option) (f bool) {
+	maps := structs.Map(&option)
+	for _, v := range maps {
+		switch v.(type) {
+		case string:
+			if v.(string) != "" {
+				f = true
+			}
+		case bool:
+			if v.(bool) == true {
+				f = true
+			}
+		}
 	}
-	return false
+	return f
 }
 
 func SwitchOption(option Option) {

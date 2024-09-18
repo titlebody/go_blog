@@ -1,6 +1,7 @@
 package user_api
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go_blog/global"
 	"go_blog/model"
@@ -32,7 +33,8 @@ func (UserApi) EmailLoginView(c *gin.Context) {
 	}
 	// 密码校验
 	isCheck := pwd.CheckPwd(userModel.Password, cr.Password)
-	if isCheck {
+	fmt.Println(isCheck)
+	if !isCheck {
 		res.FailWithMessage("用户名或者密码错误", c)
 		return
 	}
