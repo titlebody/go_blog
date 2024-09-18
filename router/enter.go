@@ -23,6 +23,7 @@ func InitRouter() *gin.Engine {
 	rouerGroup.ImagesRouter()
 	rouerGroup.AdvertRouter()
 	rouerGroup.MenuRouter()
+	rouerGroup.UserRouter()
 	//系统配置api
 
 	return r

@@ -42,7 +42,7 @@ email:
 jwt:
   secret: xxx
   expires: 48
-  issuer: xxx
+  issuer: 123
 qi_niu:
   is_enable: true
   access_key: jPLigjY9K_2TGQ9OJrovjOm618tHk1mLM2AqZWAp

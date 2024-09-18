@@ -1,6 +1,6 @@
 package main
 
-import (
+/*import (
 	"fmt"
 	"github.com/fatih/structs"
 	"go_blog/model"
@@ -27,3 +27,4 @@ func main() {
 	}
 	fmt.Println(m3)
 }
+*/
