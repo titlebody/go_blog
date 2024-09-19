@@ -15,7 +15,7 @@ type EmailLoginRequest struct {
 	Password string `json:"password" binding:"required" msg:"请输入密码"`
 }
 
-func (UserApi) EmailLoginView(c *gin.Context) {
+func (UserAPI) EmailLoginView(c *gin.Context) {
 	var cr EmailLoginRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {

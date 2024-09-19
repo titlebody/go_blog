@@ -1,6 +1,6 @@
 package main
 
-import (
+/*import (
 	"fmt"
 	"go_blog/core"
 	"go_blog/global"
@@ -27,4 +27,4 @@ func main() {
 	}
 	fmt.Println(clasime)
 
-}
+}*/

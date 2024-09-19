@@ -1,4 +1,4 @@
 package user_api
 
-type UserApi struct {
+type UserAPI struct {
 }

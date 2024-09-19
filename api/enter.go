@@ -13,7 +13,7 @@ type ApiGroup struct {
 	ImagesApi   images_api.ImagesApi
 	AdvertApi   advert_api.AdvertApi
 	MenuApi     menus_api.MenuApi
-	UserApi     user_api.UserApi
+	UserAPI     user_api.UserAPI
 }
 
 var ApiGroupApp = new(ApiGroup)

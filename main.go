@@ -20,6 +20,8 @@ func main() {
 	global.Log = core.InitLogger()
 	// 数据库初始化
 	global.DB = core.InitGorm()
+	// Redis初始化
+	global.Redis = core.ConnectRedis()
 
 	Option := flag.Parse()
 	if flag.IsWebStop(Option) {
