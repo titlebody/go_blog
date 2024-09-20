@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"go_blog/global"
 	"go_blog/model/c_type"
 	"go_blog/model/res"
 	"go_blog/service/redis"
@@ -25,7 +24,6 @@ func JwtAuth() gin.HandlerFunc {
 		}
 		// 判断是否在redis中
 		ok := redis.CheckLogout(token)
-		global.Log.Error(ok)
 		if ok {
 			res.FailWithMessage("token已过期", c)
 			c.Abort()
@@ -53,7 +51,6 @@ func JwtAdmin() gin.HandlerFunc {
 		}
 		// 判断是否在redis中
 		ok := redis.CheckLogout(token)
-		global.Log.Error(ok)
 		if ok {
 			res.FailWithMessage("token已过期", c)
 			c.Abort()

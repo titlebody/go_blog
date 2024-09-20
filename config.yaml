@@ -33,9 +33,9 @@ site_info:
   github_url: ""
 email:
   host: smtp.qq.com
-  port: "456"
-  user: 111@qq.com
-  password: xxx
+  port: 587
+  user: 876902310@qq.com
+  password: "efuccfdkapljbeeg"
   default_from_email: 晨曦知道
   use_ssl: false
   user_tls: false
