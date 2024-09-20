@@ -14,6 +14,7 @@ func (r RouterGroup) UserRouter() {
 	r.Use(sessions.Sessions("sessionid", store))
 	r.POST("/email_login", UserApi.EmailLoginView)
 	r.PUT("/user_role", middleware.JwtAdmin(), UserApi.UserUpdateView)
+	r.POST("/user_create", middleware.JwtAdmin(), UserApi.UserCreateView)
 	r.PUT("/user_password", middleware.JwtAuth(), UserApi.UserUpdatePasswordView)
 	r.GET("/user_list", middleware.JwtAuth(), UserApi.UserListView)
 	r.POST("/logout", middleware.JwtAuth(), UserApi.UserLogoutView)
