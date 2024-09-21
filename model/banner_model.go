@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// BannerModel 图片表
 type BannerModel struct {
 	MODEL
 	Path string           `json:"path"`

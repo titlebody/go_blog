@@ -1,5 +1,7 @@
 package model
 
+//用户登录数据
+
 type LoginDataModel struct {
 	MODEL
 	UserID    uint      `json:"user_id"`

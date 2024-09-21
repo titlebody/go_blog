@@ -2,6 +2,7 @@ package model
 
 import "go_blog/model/c_type"
 
+// MenuModel 菜单
 type MenuModel struct {
 	MODEL
 	Title        string        `gorm:"size:32" json:"title"`                                                                           // 菜单标题
