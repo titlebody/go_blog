@@ -4,8 +4,8 @@ package model
 
 type CommentModel struct {
 	MODEL
-	SubComments        []*CommentModel `gorm:"foreignkey:ParentCommentID" json:"sub_comments"`  // 子评论
-	ParentCommentModel *CommentModel   `gorm:"foreignkey:ParentCommentID" json:"comment_model"` // 父评论
+	SubComments        []*CommentModel `gorm:"foreignKey:ParentCommentID" json:"sub_comments"`  // 子评论
+	ParentCommentModel *CommentModel   `gorm:"foreignKey:ParentCommentID" json:"comment_model"` // 父评论
 	ParentCommentID    *uint           `json:"parent_comment_id"`                               // 父评论ID
 	Content            string          `gorm:"size:256" json:"content"`                         // 内容
 	DiggCount          int             `gorm:"size:8;default:0" json:"digg_count"`              // 点赞数

@@ -22,7 +22,17 @@ func (TagApi) TagRemoveView(c *gin.Context) {
 		res.FailWithMessage("标签不存在", c)
 		return
 	}
-	// 如果标签下有文章怎么办
+
+	// 检查标签下是否有文章
+	for _, tag := range tagList {
+		if global.DB.Preload("Articles").Where("id = ?", tag.ID).First(&tag).RowsAffected > 0 {
+			if len(tag.Articles) > 0 {
+				res.FailWithMessage("标签下有文章，禁止删除", c)
+				return
+			}
+		}
+	}
+
 	global.DB.Delete(&tagList)
 	res.OkWithMessage(fmt.Sprintf("共删除 %d 个标签", count), c)
 }
