@@ -16,5 +16,5 @@ type PageInfo struct {
 }
 
 type RemoveRequest struct {
-	IDList []uint `json:"id_list"`
+	IDList []uint `json:"id_list" msg:"请输入要删除的id数组"`
 }

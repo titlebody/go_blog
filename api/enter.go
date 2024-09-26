@@ -3,6 +3,7 @@ package api
 import (
 	"go_blog/api/advert_api"
 	"go_blog/api/article_api"
+	"go_blog/api/fade_back_api"
 	"go_blog/api/images_api"
 	"go_blog/api/menus_api"
 	"go_blog/api/message_api"
@@ -20,6 +21,7 @@ type ApiGroup struct {
 	TagApi      tag_api.TagApi
 	MessageApi  message_api.MessageApi
 	ArticleApi  article_api.ArticleApi
+	FadeBackApi fade_back_api.FadeBackApi
 }
 
 var ApiGroupApp = new(ApiGroup)

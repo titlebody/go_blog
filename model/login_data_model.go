@@ -10,5 +10,5 @@ type LoginDataModel struct {
 	NickName  string    `gorm:"size:42" json:"nick_name"`
 	Token     string    `gorm:"size:256" json:"token"`
 	Device    string    `gorm:"size:256" json:"device"` //登录设备
-	Addr      string    `gorm:"size:64" json:"addr"`
+	Addr      string    `gorm:"size:64" json:"addr"`    //登录地址
 }

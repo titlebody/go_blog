@@ -12,5 +12,6 @@ func (r RouterGroup) ArticleRouter() {
 	r.PUT("/articles/:id", middleware.JwtAuth(), app.ArticleUpdateView)
 	r.GET("/articles_list", app.ArticleListView)
 	r.GET("/articles/:id", app.ArticleView)
+	r.GET("/articles_search", app.ArticleSearchView)
 
 }

@@ -47,6 +47,14 @@ func (UserAPI) EmailLoginView(c *gin.Context) {
 		res.FailWithMessage("token生成失败", c)
 		return
 	}
+	// 登录成功后获取用户信息，存放到login_data_model
+	global.DB.Create(&model.LoginDataModel{
+		UserID:   userModel.ID,
+		NickName: userModel.NickName,
+		Token:    token,
+		IP:       c.ClientIP(),
+		Device:   c.Request.UserAgent(),
+	})
 	res.OkWithData(gin.H{
 		"token": token,
 		"name":  userModel.NickName,
