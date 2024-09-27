@@ -22,6 +22,8 @@ func main() {
 	global.DB = core.InitGorm()
 	// Redis初始化
 	global.Redis = core.ConnectRedis()
+	// es
+	core.ConnectEs()
 
 	Option := flag.Parse()
 	if flag.IsWebStop(Option) {
@@ -30,6 +32,8 @@ func main() {
 	}
 	// 路由
 	r := router.InitRouter()
+	// 跨域
+
 	addr := global.Config.System.Addr()
 	global.Log.Infof("运行在：%s", addr)
 	err := r.Run(addr)

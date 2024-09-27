@@ -25,3 +25,7 @@ type ArticleModel struct {
 	BannerPath    string         `json:"banner_path"`                                    //文章封面路径
 	Tags          c_type.Array   `gorm:"type:string;size:64" json:"tags"`                //文章标签
 }
+
+func (ArticleModel) Index() string {
+	return "article_index"
+}
