@@ -42,6 +42,7 @@ func (UserAPI) EmailLoginView(c *gin.Context) {
 		UserID:   userModel.ID,
 		NickName: userModel.NickName,
 		Role:     int(userModel.Role),
+		Avatar:   userModel.Avatar,
 	})
 	if err != nil {
 		res.FailWithMessage("token生成失败", c)
@@ -57,7 +58,6 @@ func (UserAPI) EmailLoginView(c *gin.Context) {
 	})
 	res.OkWithData(gin.H{
 		"token": token,
-		"name":  userModel.NickName,
 	}, c)
 
 }

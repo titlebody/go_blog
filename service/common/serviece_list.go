@@ -9,6 +9,7 @@ import (
 type Option struct {
 	model.PageInfo
 	Debug bool
+	Likes []string
 }
 
 func ComList[T any](mode T, option Option) (list []T, count int64, err error) {
@@ -33,6 +34,19 @@ func ComList[T any](mode T, option Option) (list []T, count int64, err error) {
 	if option.Limit <= 0 {
 		option.Limit = int(count)
 	}
-	err = DB.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
+	// 模糊搜索 Option.Key 是前端传来的昵称 nick_name，当 option.Key 为空时查询全部
+	var querys *gorm.DB
+	// sql语句
+
+	if option.Key != "" {
+		querys = DB.Where(option.Likes[0]+" LIKE ?", "%"+option.Key+"%")
+		count = querys.Select("id").Find(&list).RowsAffected
+		querys = DB.Where(option.Likes[0]+" LIKE ?", "%"+option.Key+"%")
+	} else {
+		querys = DB
+	}
+
+	err = querys.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
+
 	return list, count, err
 }

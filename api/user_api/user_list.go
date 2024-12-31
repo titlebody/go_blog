@@ -22,13 +22,13 @@ func (UserAPI) UserListView(c *gin.Context) {
 	}
 	list, count, _ := common.ComList(model.UserModel{}, common.Option{
 		PageInfo: page,
+		Likes:    []string{"nick_name"},
 	})
 	var users []model.UserModel
 	for _, user := range list {
 		if claims.Role != int(c_type.PermissionAdmin) {
 			//非管理员
 			user.UserName = ""
-
 		}
 		// 手机号脱敏
 		//176****2311

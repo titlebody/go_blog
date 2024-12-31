@@ -76,11 +76,12 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 		return
 	}
 
-	// 上传到七牛
+	// 上传到本地
 	fileType := c_type.Local
 	res.Msg = "图片上传成功"
 	res.IsSuccess = true
 
+	// 上传到七牛
 	if global.Config.QiNiu.IsEnable {
 		filePath, err := qiniu.UploadImages(byteDate, fileName, global.Config.QiNiu.Prefix)
 		if err != nil {

@@ -21,7 +21,7 @@ func (UserService) CreateUser(userName, nickName, password string, role c_type.R
 
 	// 头像
 	// 1.默认头像
-	avatar := "uploads/avatar/default.webp"
+	avatar := "/uploads/avatar/default.webp"
 	// 2.随机头像
 	//入库
 	err = global.DB.Create(&model.UserModel{

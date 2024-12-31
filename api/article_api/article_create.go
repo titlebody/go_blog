@@ -9,16 +9,16 @@ import (
 )
 
 type CreateArticleRequest struct {
-	Title    string   `json:"title" binding:"required" msg:"请输入标题"`
-	Abstract string   `json:"abstract" binding:"required" msg:"请输入简介"`
-	Content  string   `json:"content" binding:"required" msg:"请输入内容"`
-	Category string   `json:"category" binding:"required"  msg:"请输入分类"`
-	Source   string   `json:"source"`
-	Link     string   `json:"link"`
-	NickName string   `json:"nick_name"`
-	Tags     []string `json:"tags" binding:"required"  msg:"请输入标签"`
-	UserID   uint     `json:"user_id"`
-	BannerID uint     `json:"banner_id" msg:"请选择封面" binding:"required"`
+	Title      string   `json:"title" binding:"required" msg:"请输入标题"`
+	Abstract   string   `json:"abstract" binding:"required" msg:"请输入简介"`
+	Content    string   `json:"content" binding:"required" msg:"请输入内容"`
+	Category   string   `json:"category" binding:"required"  msg:"请输入分类"`
+	Source     string   `json:"source"`
+	Link       string   `json:"link"`
+	NickName   string   `json:"nick_name"`
+	Tags       []string `json:"tags" binding:"required"  msg:"请输入标签"`
+	UserID     uint     `json:"user_id"`
+	BannerPath string   `json:"banner_path" msg:"请选择封面" binding:"required"`
 }
 
 func (ArticleApi) ArticleCreateView(c *gin.Context) {
@@ -40,7 +40,7 @@ func (ArticleApi) ArticleCreateView(c *gin.Context) {
 
 	// 获取 BannerModel 信息
 	var banner model.BannerModel
-	if err := global.DB.Where("id = ?", cr.BannerID).First(&banner).Error; err != nil {
+	if err := global.DB.Model(&model.BannerModel{}).Where("path = ?", cr.BannerPath).First(&banner).Error; err != nil {
 		return
 	}
 

@@ -7,8 +7,21 @@ import (
 	"go_blog/model/res"
 )
 
+type UpdateArticleRequest struct {
+	Title    string   `json:"title" binding:"required" msg:"请输入标题"`
+	Abstract string   `json:"abstract" binding:"required" msg:"请输入简介"`
+	Content  string   `json:"content" binding:"required" msg:"请输入内容"`
+	Category string   `json:"category" binding:"required"  msg:"请输入分类"`
+	Source   string   `json:"source"`
+	Link     string   `json:"link"`
+	NickName string   `json:"nick_name"`
+	Tags     []string `json:"tags" binding:"required"  msg:"请输入标签"`
+	UserID   uint     `json:"user_id"`
+	BannerID uint     `json:"banner_id" msg:"请选择封面" binding:"required"`
+}
+
 func (ArticleApi) ArticleUpdateView(c *gin.Context) {
-	var cr CreateArticleRequest
+	var cr UpdateArticleRequest
 	if err := c.ShouldBind(&cr); err != nil {
 		res.FailWithError(err, &cr, c)
 		return

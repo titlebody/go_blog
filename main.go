@@ -1,12 +1,18 @@
 package main
 
 import (
+	"encoding/gob"
 	"go_blog/core"
 	_ "go_blog/docs"
 	"go_blog/flag"
 	"go_blog/global"
 	"go_blog/router"
+	"time"
 )
+
+func init() {
+	gob.Register(time.Time{})
+}
 
 // @title go_blog API文档
 // @version 1.0

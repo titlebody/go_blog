@@ -7,7 +7,7 @@ import (
 )
 
 type SettingsUri struct {
-	Name string `uri:"name"`
+	Name string `url:"name"`
 }
 
 // SettingsInfoView 显示某一项的配置信息（qq,jwt,qiniu,email,site）

@@ -16,6 +16,7 @@ func (ArticleApi) ArticleListView(c *gin.Context) {
 
 	list, count, _ := common.ComList(model.ArticleModel{}, common.Option{
 		PageInfo: cr,
+		Likes:    []string{"title"},
 	})
 	res.OkWithList(list, count, c)
 }

@@ -26,4 +26,8 @@ main gvb.sql config.yaml uploads docs
 chmod +x main
 // 后台执行文件 防止关闭ssh 进程结束
 nohup ./main &
+// 查看运行端口
+netstat -lntep
+// 停止运行端口
+kill + 号
 

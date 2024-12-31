@@ -16,6 +16,7 @@ func (UserAPI) UserRemoveView(c *gin.Context) {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
+
 	var userList []model.UserModel
 	count := global.DB.Find(&userList, cr.IDList).RowsAffected
 	if count == 0 {
@@ -24,18 +25,31 @@ func (UserAPI) UserRemoveView(c *gin.Context) {
 	}
 
 	err = global.DB.Transaction(func(tx *gorm.DB) error {
-		//删除用户 删除用户消息表，评论表，用户收藏的文章，用户发布的文章
-		err = global.DB.Delete(&userList).Error
-		if err != nil {
+		// 删除用户登录数据
+		if err := tx.Where("user_id IN ?", cr.IDList).Delete(&model.LoginDataModel{}).Error; err != nil {
 			global.Log.Error(err)
 			return err
 		}
+
+		// 删除用户收藏的文章
+		if err := tx.Where("user_id IN ?", cr.IDList).Delete(&model.UserCollectModel{}).Error; err != nil {
+			global.Log.Error(err)
+			return err
+		}
+
+		// 删除用户
+		if err := tx.Delete(&userList).Error; err != nil {
+			global.Log.Error(err)
+			return err
+		}
+
 		return nil
 	})
+
 	if err != nil {
 		res.FailWithMessage("删除失败", c)
 		return
 	}
-	res.OkWithMessage(fmt.Sprintf("共删除%d个用户", count), c)
 
+	res.OkWithMessage(fmt.Sprintf("共删除%d个用户", count), c)
 }
